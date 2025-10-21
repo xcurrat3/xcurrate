@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="text-center p-5 bg-white rounded shadow-sm card-container mx-auto">
+    <h1 class="display-4">🎉 Kuis Selesai!</h1>
+    <p class="lead mt-3">Skor Akhir Anda:</p>
+    <h2 class="display-1 text-primary"><strong>{{ skor }} / {{ total_soal }}</strong></h2>
+    <hr class="my-4">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-5 mx-2">
+            Main Lagi
+        </a>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary btn-lg px-5 mx-2">
+            Logout
+        </a>
+    </div>
+</div>
+{% endblock %}

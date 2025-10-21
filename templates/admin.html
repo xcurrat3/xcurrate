@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+    <h2 class="mb-4">Panel Admin - Manajemen Soal</h2>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-primary text-white">
+            <strong>Tambah Soal Baru</strong>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('tambah_soal') }}" method="POST">
+                <div class="mb-3">
+                    <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                    <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pilihan" class="form-label">Pilihan Jawaban</label>
+                    <input type="text" class="form-control" id="pilihan" name="pilihan" required>
+                    <div class="form-text">Pisahkan setiap pilihan dengan koma (mis: Apel,Pisang,Jeruk)</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="jawaban" class="form-label">Jawaban Benar</label>
+                        <input type="text" class="form-control" id="jawaban" name="jawaban" required>
+                        <div class="form-text">Tulis salah satu pilihan yang benar (mis: Apel)</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="bahasa" class="form-label">Bahasa</label>
+                        <select class="form-select" id="bahasa" name="bahasa">
+                            <option value="Inggris">Inggris</option>
+                            <option value="Jepang">Jepang</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Tambah Soal</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header">
+            <strong>Daftar Soal</strong>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Bahasa</th>
+                            <th>Pertanyaan</th>
+                            <th>Pilihan</th>
+                            <th>Jawaban</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for soal in semua_soal %}
+                        <tr>
+                            <td>{{ soal.id }}</td>
+                            <td><span class="badge bg-secondary">{{ soal.bahasa }}</span></td>
+                            <td>{{ soal.pertanyaan }}</td>
+                            <td>{{ soal.pilihan }}</td>
+                            <td><strong>{{ soal.jawaban }}</strong></td>
+                            <td>
+                                <form action="{{ url_for('hapus_soal') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus soal ini?');">
+                                    <input type="hidden" name="soal_id" value="{{ soal.id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">Belum ada soal.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

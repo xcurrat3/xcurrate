@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card shadow-sm border-0 mx-auto card-container">
+    <div class="card-header bg-primary text-white">
+        <h5>Soal {{ nomor_soal }} dari {{ total_soal }}</h5>
+    </div>
+    <div class="card-body p-5">
+        <h3 class="card-title mb-4">{{ soal.pertanyaan }}</h3>
+        
+        <form method="POST" action="{{ url_for('kuis') }}">
+            <div class="list-group">
+                {% for pilihan in pilihan_list %}
+                <label class="list-group-item list-group-item-action fs-5">
+                    <input class="form-check-input me-2" type="radio" name="jawaban_user" value="{{ pilihan }}" id="pilihan{{ loop.index }}" required>
+                    {{ pilihan }}
+                </label>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-success w-100 mt-4 btn-lg">Jawab</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="text-center p-5 bg-white rounded shadow-sm">
+    <h1>Selamat Datang di KuisApp!</h1>
+    <p class="lead">Silakan pilih bahasa untuk memulai kuis.</p>
+    <hr class="my-4">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a href="{{ url_for('mulai_kuis', bahasa='Inggris') }}" class="btn btn-primary btn-lg px-5 mx-2">
+            Mulai Kuis Bahasa Inggris
+        </a>
+        <a href="{{ url_for('mulai_kuis', bahasa='Jepang') }}" class="btn btn-success btn-lg px-5 mx-2">
+            Mulai Kuis Bahasa Jepang
+        </a>
+    </div>
+</div>
+{% endblock %}
